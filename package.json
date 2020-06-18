@@ -1,0 +1,31 @@
+{
+  "name": "fd-ecommerce-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "mongoose": "^5.9.19",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.4"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frederick-88/fd-ecommerce-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Frederick-88/fd-ecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/Frederick-88/fd-ecommerce-backend#readme",
+  "description": ""
+}
