@@ -11,6 +11,7 @@ module.exports.validateUser = (req, res, next) => {
       });
     } else {
       // validation so that user id of the user is same with the id user of the token.
+      // decoded = decode si token dan dapatkan id dari si payload di controller.
       req.userId = decoded.id;
       next();
     }
