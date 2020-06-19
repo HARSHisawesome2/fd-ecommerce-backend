@@ -23,7 +23,7 @@ const UsersModel = new Schema({
     required: true,
   },
 });
-Users.pre("save", function (next) {
+UsersModel.pre("save", function (next) {
   this.password = bcrypt.hashSync(this.password, saltRounds);
   next();
 });

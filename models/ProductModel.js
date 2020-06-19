@@ -31,5 +31,8 @@ const ProductModel = new Schema({
     type: String,
     required: true,
   },
+  cart: {
+    type: Array,
+  },
 });
 module.exports = mongoose.model("product", ProductModel);
