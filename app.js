@@ -11,6 +11,7 @@ var usersRouter = require("./routes/UsersRouter");
 
 var app = express();
 
+// ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu
 mongoose.connect("mongodb://localhost/fd-ecommerce-backend", {
   useNewUrlParser: true,
   useUnifiedTopology: true,

@@ -24,17 +24,18 @@ module.exports = {
   },
   //   login authentication
   login: (req, res, next) => {
-    const username = req.body.username;
-    UsersModel.findOne({ username }).then((user) => {
+    const email = req.body.email;
+    UsersModel.findOne({ email }).then((user) => {
       // check if user exists
       if (!user) {
-        return res.status(404).json({ error: "Username not found" });
+        return res.status(404).json({ error: "Email not found" });
       } else {
         // validation password
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          //   make payload so that when token is decoded in frontend this is the data that it will get
+          //  make payload so that when token is decoded in frontend this is the data that it will get
           const payload = {
             id: user.id,
+            email: user.email,
             username: user.username,
           };
           //  Sign token
