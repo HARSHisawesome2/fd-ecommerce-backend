@@ -1,6 +1,10 @@
 const UsersModel = require("../models/UsersModel");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 module.exports = {
+  // register user
   register: (req, res, next) => {
     let obj = {
       username: req.body.username,
@@ -18,6 +22,41 @@ module.exports = {
       })
       .catch((error) => res.json(error));
   },
+  //   login authentication
+  login: (req, res, next) => {
+    const username = req.body.username;
+    UsersModel.findOne({ username }).then((user) => {
+      // check if user exists
+      if (!user) {
+        return res.status(404).json({ error: "Username not found" });
+      } else {
+        // validation password
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          //   make payload so that when token is decoded in frontend this is the data that it will get
+          const payload = {
+            id: user.id,
+            username: user.username,
+          };
+          //  Sign token
+          jwt.sign(
+            payload,
+            process.env.PRIVATE_KEY,
+            { expiresIn: 31556926 }, // 1 year of expiration
+            (err, token) => {
+              res.json({
+                status: "success",
+                data: token,
+              });
+            }
+          );
+        } else {
+          return res
+            .status(404)
+            .json({ passwordincorrect: "Password incorrect" });
+        }
+      }
+    });
+  },
 
   getAllUsers: (req, res, next) => {
     UsersModel.find({})
@@ -28,7 +67,7 @@ module.exports = {
           data: result,
         });
       })
-      .catch((error) => res.json(error));
+      .catch((error) => res.status(400).json(error));
   },
 
   getUserId: (req, res, next) => {
