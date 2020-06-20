@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const ProductModel = new Schema({
   image: {
     type: String,
-    default:
-      "https://baznas.jogjakota.go.id/assets/upload/image-artikel/default.jpg",
+    default: "public/productImages/default-product-image.jpg",
   },
   name: {
     type: String,

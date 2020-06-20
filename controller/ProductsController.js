@@ -3,6 +3,7 @@ require("dotenv").config();
 
 module.exports = {
   createProduct: (req, res, next) => {
+    console.log(req.body.image);
     //   to cover when image field isn't filled, so default can come in (if not it will be replaced with "")
     let objWithoutImage = {
       name: req.body.name,
@@ -23,11 +24,8 @@ module.exports = {
       productType: req.body.productType,
     };
 
-    console.log(req.file.path);
-    console.log(req.body.image);
-
     // see obj & objWithoutImage
-    if (obj.image == "") {
+    if (obj.image == null) {
       productsModel
         .create(objWithoutImage)
         .then((result) => {
@@ -59,6 +57,7 @@ module.exports = {
       productsModel
         .findByIdAndUpdate(
           userId,
+          // req.file && req.file.path karena kita plih file menggunakan "CHOOSE FILE"
           // dibikin bentuk || untuk mengcover apabila tidak ada yang diedit pada field tersebut maka datanya akan tetap seperti sebelumnya.
           {
             image: (req.file && req.file.path) || dataUserId.image,
