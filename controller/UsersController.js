@@ -22,7 +22,7 @@ module.exports = {
       })
       .catch((error) => res.json(error));
   },
-  //   login authentication
+  //   login user (sign in) authentication
   login: (req, res, next) => {
     const email = req.body.email;
     UsersModel.findOne({ email }).then((user) => {
@@ -46,6 +46,44 @@ module.exports = {
             (err, token) => {
               res.json({
                 status: "success",
+                data: token,
+              });
+            }
+          );
+        } else {
+          return res
+            .status(404)
+            .json({ passwordincorrect: "Password incorrect" });
+        }
+      }
+    });
+  },
+
+  // login as admin authentication.
+  loginAdmin: (req, res, next) => {
+    const email = req.body.email;
+    UsersModel.findOne({ email }).then((user) => {
+      // check if user's email is the same as admin's email.
+      if (user.email !== "admin@gmail.com") {
+        return res.status(404).json({ error: "Admin's email not found" });
+      } else {
+        // validation password
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          //  make payload so that when token is decoded in frontend this is the data that it will get
+          const payload = {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+          };
+          //  Sign token
+          jwt.sign(
+            payload,
+            process.env.PRIVATE_KEY,
+            { expiresIn: 31556926 }, // 1 year of expiration
+            (err, token) => {
+              res.json({
+                status: "success",
+                message: "You're an admin!",
                 data: token,
               });
             }

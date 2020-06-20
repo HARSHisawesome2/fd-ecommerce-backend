@@ -5,14 +5,16 @@ const bodyParser = require("body-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/UsersRouter");
 
 var app = express();
 
+const privateURLMongoDB = process.env.PRIVATE_URL_MONGODB_LOCALHOST;
 // ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu
-mongoose.connect("mongodb://localhost/fd-ecommerce-backend", {
+mongoose.connect(privateURLMongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
