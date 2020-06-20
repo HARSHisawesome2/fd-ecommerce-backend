@@ -5,7 +5,7 @@ const ProductModel = new Schema({
   image: {
     type: String,
     default:
-      "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
+      "https://baznas.jogjakota.go.id/assets/upload/image-artikel/default.jpg",
   },
   name: {
     type: String,
@@ -19,8 +19,8 @@ const ProductModel = new Schema({
     type: String,
     required: true,
   },
-  sale: {
-    type: Boolean,
+  quantity: {
+    type: Number,
     required: true,
   },
   productGender: {
@@ -30,9 +30,6 @@ const ProductModel = new Schema({
   productType: {
     type: String,
     required: true,
-  },
-  cart: {
-    type: Array,
   },
 });
 module.exports = mongoose.model("product", ProductModel);

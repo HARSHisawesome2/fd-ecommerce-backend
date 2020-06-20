@@ -15,13 +15,17 @@ const UsersModel = new Schema({
     unique: true,
   },
   phoneNumber: {
-    type: String,
+    type: Number,
     required: true,
   },
   password: {
     type: String,
     required: true,
   },
+  // image: {
+  //   type: String,
+  //   required: true,
+  // },
 });
 UsersModel.pre("save", function (next) {
   this.password = bcrypt.hashSync(this.password, saltRounds);

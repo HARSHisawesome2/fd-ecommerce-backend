@@ -20,7 +20,7 @@ module.exports = {
           data: result,
         });
       })
-      .catch((error) => res.json(error));
+      .catch((error) => res.status(400).json(error));
   },
   //   login user (sign in) authentication
   login: (req, res, next) => {
@@ -46,7 +46,7 @@ module.exports = {
             (err, token) => {
               res.json({
                 status: "success",
-                data: token,
+                token: token,
               });
             }
           );
@@ -84,7 +84,7 @@ module.exports = {
               res.json({
                 status: "success",
                 message: "You're an admin!",
-                data: token,
+                token: token,
               });
             }
           );
@@ -100,7 +100,7 @@ module.exports = {
   getAllUsers: (req, res, next) => {
     UsersModel.find({})
       .then((result) => {
-        res.json({
+        res.status(200).json({
           status: "success",
           message: "Successfully get all users!",
           data: result,
@@ -118,15 +118,17 @@ module.exports = {
           data: result,
         });
       })
-      .catch((error) => res.json(error));
+      .catch((error) => res.status(400).json(error));
   },
 
   deleteById: (req, res, next) => {
-    UsersModel.findByIdAndRemove(req.params.userId).then(() => {
-      res.json({
-        status: "success",
-        message: `Successfully delete id of ${req.params.userId} !`,
-      });
-    });
+    UsersModel.findByIdAndRemove(req.params.userId)
+      .then(() => {
+        res.json({
+          status: "success",
+          message: `Successfully delete id of ${req.params.userId} !`,
+        });
+      })
+      .catch((error) => res.status(400).json(error));
   },
 };
