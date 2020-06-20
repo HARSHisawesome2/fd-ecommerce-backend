@@ -61,7 +61,7 @@ module.exports = {
           userId,
           // dibikin bentuk || untuk mengcover apabila tidak ada yang diedit pada field tersebut maka datanya akan tetap seperti sebelumnya.
           {
-            image: req.body.image || dataUserId.image,
+            image: (req.file && req.file.path) || dataUserId.image,
             name: req.body.name || dataUserId.name,
             price: req.body.price || dataUserId.price,
             description: req.body.description || dataUserId.description,
