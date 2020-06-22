@@ -30,7 +30,7 @@ router.put(
   validateAdmin,
   productController.editProductById
 );
-router.get("/getproduct", validateUser, productController.getAllProducts);
+router.get("/getproduct", productController.getAllProducts);
 router.get(
   "/getproduct/:productId",
   validateUser,
