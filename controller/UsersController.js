@@ -28,7 +28,9 @@ module.exports = {
     UsersModel.findOne({ email }).then((user) => {
       // check if user exists
       if (!user) {
-        return res.status(404).json({ error: "Email not found" });
+        return res
+          .status(404)
+          .json({ status: "failed", error: "Email not found" });
       } else {
         // validation password
         if (bcrypt.compareSync(req.body.password, user.password)) {
@@ -51,9 +53,10 @@ module.exports = {
             }
           );
         } else {
-          return res
-            .status(404)
-            .json({ passwordincorrect: "Password incorrect" });
+          return res.status(404).json({
+            status: "failed",
+            passwordincorrect: "Password incorrect",
+          });
         }
       }
     });
@@ -67,7 +70,9 @@ module.exports = {
         // check if "user" is null = means not registered.
         // check if user's email is the same as admin's email.
         if (!user || user.email !== "admin@gmail.com") {
-          return res.status(404).json({ error: "Admin's email not found" });
+          return res
+            .status(404)
+            .json({ status: "failed", error: "Admin's email not found" });
         } else {
           // validation password
           if (bcrypt.compareSync(req.body.password, user.password)) {
@@ -91,9 +96,10 @@ module.exports = {
               }
             );
           } else {
-            return res
-              .status(404)
-              .json({ passwordincorrect: "Password incorrect" });
+            return res.status(404).json({
+              status: "failed",
+              error: "Password incorrect",
+            });
           }
         }
       })
