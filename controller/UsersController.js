@@ -55,7 +55,7 @@ module.exports = {
         } else {
           return res.status(404).json({
             status: "failed",
-            passwordincorrect: "Password incorrect",
+            error: "Password incorrect",
           });
         }
       }
