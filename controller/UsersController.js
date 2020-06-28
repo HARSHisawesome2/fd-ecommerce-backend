@@ -1,6 +1,7 @@
 const UsersModel = require("../models/UsersModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const validateRegisterInput = require("../validator/RegisterValidator");
 require("dotenv").config();
 
 module.exports = {
@@ -12,16 +13,48 @@ module.exports = {
       phoneNumber: req.body.phoneNumber,
       password: req.body.password,
     };
-    UsersModel.create(obj)
-      .then((result) => {
-        res.json({
-          status: "success",
-          message: "Successfully create account!",
-          data: result,
+    // Validation Register
+    const errors = validateRegisterInput(obj).errors;
+    const isValid = validateRegisterInput(obj).isValid;
+    // if invalid / doesn't pass validation
+    if (!isValid) {
+      return res.status(errors.status).json(errors);
+    }
+
+    UsersModel.find().then((user) => {
+      // Username duplicate validator
+      if (user.find((element) => element.username === obj.username)) {
+        return res.status(401).json({
+          status: "error",
+          error: `Username ${req.body.username} already exist!`,
         });
-      })
-      .catch((error) => res.status(400).json(error));
+        // Email duplicate validator
+      } else if (user.find((element) => element.email === obj.email)) {
+        return res.status(401).json({
+          status: "error",
+          error: `Username ${req.body.email} already exist!`,
+        });
+        // PhoneNumber duplicate validator
+      } else if (
+        user.find((element) => element.phoneNumber === obj.phoneNumber)
+      ) {
+        return res.status(401).json({
+          status: "error",
+          error: `Username ${req.body.phoneNumber} already exist!`,
+        });
+      } else
+        UsersModel.create(obj)
+          .then((result) => {
+            res.json({
+              status: "success",
+              message: "Successfully create account!",
+              data: result,
+            });
+          })
+          .catch((error) => res.status(400).json(error));
+    });
   },
+
   //   login user (sign in) authentication
   login: (req, res, next) => {
     const email = req.body.email;
