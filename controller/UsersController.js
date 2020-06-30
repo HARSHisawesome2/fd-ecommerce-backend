@@ -26,22 +26,15 @@ module.exports = {
       if (user.find((element) => element.username === obj.username)) {
         return res.status(401).json({
           status: "error",
-          error: `Username ${req.body.username} already exist!`,
+          error: `Username "${req.body.username}" already exist!`,
         });
         // Email duplicate validator
       } else if (user.find((element) => element.email === obj.email)) {
         return res.status(401).json({
           status: "error",
-          error: `Username ${req.body.email} already exist!`,
+          error: `Email "${req.body.email}" already exist!`,
         });
         // PhoneNumber duplicate validator
-      } else if (
-        user.find((element) => element.phoneNumber === obj.phoneNumber)
-      ) {
-        return res.status(401).json({
-          status: "error",
-          error: `Username ${req.body.phoneNumber} already exist!`,
-        });
       } else
         UsersModel.create(obj)
           .then((result) => {
