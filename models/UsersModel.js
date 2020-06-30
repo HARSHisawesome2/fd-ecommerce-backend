@@ -7,6 +7,7 @@ const UsersModel = new Schema({
   username: {
     type: String,
     required: true,
+    // unique function = true. But the error return hard to processed by frontend
     unique: true,
   },
   email: {
