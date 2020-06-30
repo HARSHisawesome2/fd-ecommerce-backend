@@ -55,6 +55,19 @@ module.exports = {
     });
   },
 
+  // ###################################################
+  // Register's Expected error output :
+  // {
+  //   "status": 401,
+  //   "message": {
+  //     "username": "Username is required.",
+  //     "email": "Email is required.",
+  //     "phoneNumber": "PhoneNumber is required.",
+  //     "password": "Password is required."
+  //   }
+  // }
+  // ###################################################
+
   //   login user (sign in) authentication
   login: (req, res, next) => {
     const email = req.body.email;
