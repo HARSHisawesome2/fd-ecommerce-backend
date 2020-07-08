@@ -13,9 +13,13 @@ var productRouter = require("./routes/ProductRouter");
 
 var app = express();
 
+// biasanya mongoDB diperlukan supaya kita bisa post, ngga hanya get. Istilahnya sebagai database, untuk skala local kita ckup install mongodb dan letakkan nama di url
 const privateURLMongoDB = process.env.PRIVATE_URL_MONGODB_LOCALHOST;
-// ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu
-mongoose.connect(privateURLMongoDB, {
+// untuk deploy ke vercel/api lain kita harus bikin online punya mongoDB harus create disana
+const onlineURLMongoDB =
+  "mongodb+srv://admin:admin@mongofrederick-b7dzn.mongodb.net/<dbname>?retryWrites=true&w=majority";
+// ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu & mongoDb adalah platform untuk database tanpa itu kau gabisa post
+mongoose.connect(onlineURLMongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -37,6 +41,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // dengan url "http://localhost:8000/public/productImages/2020-06-20T10:44:44.152Z-defaultPicture.jpg"
 app.use("/public", express.static("public"));
 app.use("/public/productImages", express.static("public"));
+
+app.get("/", (req, res) => {
+  res.send("MASUK");
+});
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
