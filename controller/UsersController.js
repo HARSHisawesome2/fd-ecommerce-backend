@@ -149,7 +149,7 @@ module.exports = {
     UsersModel.find({})
       .then((result) => {
         res.status(200).json({
-          status: "success",
+          status: "successa",
           message: "Successfully get all users!",
           data: result,
         });
