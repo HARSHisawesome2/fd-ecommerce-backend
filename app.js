@@ -19,7 +19,7 @@ const privateURLMongoDB = process.env.PRIVATE_URL_MONGODB_LOCALHOST;
 const onlineURLMongoDB =
   "mongodb+srv://admin:admin@mongofrederick-b7dzn.mongodb.net/<dbname>?retryWrites=true&w=majority";
 // ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu & mongoDb adalah platform untuk database tanpa itu kau gabisa post
-mongoose.connect(onlineURLMongoDB, {
+mongoose.connect(privateURLMongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -41,10 +41,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // dengan url "http://localhost:8000/public/productImages/2020-06-20T10:44:44.152Z-defaultPicture.jpg"
 app.use("/public", express.static("public"));
 app.use("/public/productImages", express.static("public"));
-
-app.get("/", (req, res) => {
-  res.send("MASUK");
-});
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
