@@ -15,10 +15,9 @@ var app = express();
 
 // biasanya mongoDB diperlukan supaya kita bisa post, ngga hanya get. Istilahnya sebagai database, untuk skala local kita ckup install mongodb dan letakkan nama di url
 const privateURLMongoDB = process.env.PRIVATE_URL_MONGODB_LOCALHOST;
-// untuk deploy ke vercel/api lain kita harus bikin online punya mongoDB harus create disana
-const onlineURLMongoDB =
-  "mongodb+srv://admin:admin@mongofrederick-b7dzn.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const onlineURLMongoDB = process.env.ONLINE_URL_MONGODB;
 // ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu & mongoDb adalah platform untuk database tanpa itu kau gabisa post
+// mongoDB adalah database, pilih yang mana yang ingin kamu gunakan. Development pakai localhost, tapi klau mau hosting udah harus online punya.
 mongoose.connect(privateURLMongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
