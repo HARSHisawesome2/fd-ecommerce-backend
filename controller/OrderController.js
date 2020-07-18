@@ -14,5 +14,35 @@ module.exports = {
       products: req.body.products,
       customerId: req.body.customerId,
     };
+    orderModel
+      .create(obj)
+      .then((response) => {
+        res.json(response);
+      })
+      .catch((err) => res.status(400).json(err));
+  },
+  getAllOrder: (req, res, next) => {
+    orderModel
+      .find({})
+      .populate("customerId")
+      .then((result) => {
+        res.json({
+          status: "success",
+          message: `Successfully get data order!`,
+          data: result,
+        });
+      })
+      .catch((error) => res.status(400).json(error));
+  },
+  deleteById: (req, res, next) => {
+    orderModel
+      .findByIdAndRemove(req.params.orderId)
+      .then(() => {
+        res.json({
+          status: "success",
+          message: `Successfully delete id of ${req.params.orderId} !`,
+        });
+      })
+      .catch((error) => res.status(400).json(error));
   },
 };

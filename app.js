@@ -10,6 +10,7 @@ require("dotenv").config();
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/UsersRouter");
 var productRouter = require("./routes/ProductRouter");
+var orderRouter = require("./routes/OrderRouter");
 
 var app = express();
 
@@ -18,10 +19,13 @@ const privateURLMongoDB = process.env.PRIVATE_URL_MONGODB_LOCALHOST;
 const onlineURLMongoDB = process.env.ONLINE_URL_MONGODB;
 // ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu & mongoDb adalah platform untuk database tanpa itu kau gabisa post
 // mongoDB adalah database, pilih yang mana yang ingin kamu gunakan. Development pakai localhost, tapi klau mau hosting udah harus online punya.
-mongoose.connect(onlineURLMongoDB, {
+mongoose.connect(privateURLMongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
+
+mongoose.set("useCreateIndex", true);
 
 app.use(cors());
 
@@ -44,5 +48,6 @@ app.use("/public/productImages", express.static("public"));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/product", productRouter);
+// app.use("/order", orderRouter);
 
 module.exports = app;
