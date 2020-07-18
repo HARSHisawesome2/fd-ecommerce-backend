@@ -30,7 +30,7 @@ module.exports = {
         .create(objWithoutImage)
         .then((result) => {
           res.json({
-            status: "successa",
+            status: "success",
             message: "Successfully create product!",
             data: result,
           });
