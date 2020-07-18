@@ -24,7 +24,9 @@ module.exports = {
   getAllOrder: (req, res, next) => {
     orderModel
       .find({})
-      .populate("customerId", "username email phoneNumber") //same as orderModel's field name
+      //1st parameter must same as orderModel's field name
+      //2nd parameter is for what field do you want to show
+      .populate("customerId", "username email phoneNumber")
       .then((result) => {
         res.json({
           status: "success",
