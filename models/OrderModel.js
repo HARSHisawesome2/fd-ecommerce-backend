@@ -42,7 +42,7 @@ const OrderModel = new Schema(
     customerId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "customerId",
+      ref: "UsersModel",
     },
   },
   // to set time

@@ -48,6 +48,6 @@ app.use("/public/productImages", express.static("public"));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/product", productRouter);
-// app.use("/order", orderRouter);
+app.use("/order", orderRouter);
 
 module.exports = app;
