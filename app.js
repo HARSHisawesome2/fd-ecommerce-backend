@@ -19,7 +19,7 @@ const privateURLMongoDB = process.env.PRIVATE_URL_MONGODB_LOCALHOST;
 const onlineURLMongoDB = process.env.ONLINE_URL_MONGODB;
 // ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu & mongoDb adalah platform untuk database tanpa itu kau gabisa post
 // mongoDB adalah database, pilih yang mana yang ingin kamu gunakan. Development pakai localhost, tapi klau mau hosting udah harus online punya.
-mongoose.connect(privateURLMongoDB, {
+mongoose.connect(onlineURLMongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
