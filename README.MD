@@ -4,3 +4,5 @@
 - git commit -am "make it better"
 - git push heroku master
 - with git push
+
+### When set it up in cloudflare, you need to set the SSL till flexible. So your AWS Settings could come in.
