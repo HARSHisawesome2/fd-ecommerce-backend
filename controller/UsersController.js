@@ -13,7 +13,7 @@ module.exports = {
       phoneNumber: req.body.phoneNumber,
       password: req.body.password,
     };
-    // Validation Register
+    // Validation Registera
     const errors = validateRegisterInput(obj).errors;
     const isValid = validateRegisterInput(obj).isValid;
     // if invalid / doesn't pass validation
