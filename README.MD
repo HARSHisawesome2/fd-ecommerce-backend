@@ -1,5 +1,6 @@
 ## Backend of React-Ecommerce made with ExpressJS (NodeJS) & MongoDB, deployed to AWS
 
+### Note :
 ### If you use heroku as your backend hosting's choice, everytime you want to commit use heroku's way :
 
 - git add .
