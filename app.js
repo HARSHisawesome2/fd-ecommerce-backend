@@ -15,6 +15,7 @@ var orderRouter = require("./routes/OrderRouter");
 var app = express();
 
 // biasanya mongoDB diperlukan supaya kita bisa post, ngga hanya get. Istilahnya sebagai database, untuk skala local kita ckup install mongodb dan letakkan nama di url
+// tips on setup local connection of mongo database with tools to access DB without using CLI method = https://zellwk.com/blog/local-mongodb/#:~:text=To%20connect%20to%20your%20local,databases%20in%20your%20local%20MongoDB.
 const privateURLMongoDB = process.env.PRIVATE_URL_MONGODB_LOCALHOST;
 const onlineURLMongoDB = process.env.ONLINE_URL_MONGODB;
 // ini adalah sebuah must, dibutuhkan ini untuk mendetect databasemu & mongoDb adalah platform untuk database tanpa itu kau gabisa post
