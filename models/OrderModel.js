@@ -3,36 +3,8 @@ const Schema = mongoose.Schema;
 
 const OrderModel = new Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
-      required: true,
-    },
-    country: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-      type: Number,
-      required: true,
-    },
-    postalCode: {
-      type: Number,
       required: true,
     },
     products: {
@@ -40,10 +12,56 @@ const OrderModel = new Schema(
       required: true,
     },
     customerId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: "UsersModel", // must same as the model's name (exported)
+     type: DataTypes.UUID,
+        references: {
+            model: 'users',
+            key: 'id',
+          },
     },
+    
+    paymentid : {
+    type : string ,
+    required : true 
+      
+      
+    },
+    
+    paymentstatus  : {
+    type : DataTypes.BOOLEAN,
+    defaultValue : false,
+    
+    },
+    
+    
+      itemsPrice: {
+        type: Number,
+        required: true,
+        default: 0,
+      },
+    
+    
+    totalPrice: {
+        type: Number,
+        required: true,
+        default: 0,
+      },
+    
+    
+    orderstaus : {
+      type: Sequelize.ENUM("pending", "processing", "devlivered"),
+      defaultValue: "processing",
+      
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   },
   // to set time
   { timestamps: true }
